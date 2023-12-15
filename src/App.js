@@ -4,9 +4,12 @@ import RenderExperienceInfo from "./components/RenderExperienceInfo";
 import AddFormExp from './components/AddFormExp';
 import Section from './components/Section';
 import GeneralInfo from './components/GeneralInfo';
+import AddFormGeneral from './components/AddFormGeneral';
 
 function App() {
   const [showAddExpForm, setShowAddExpForm] = useState(true)
+  const [showAddGeneralForm, setShowAddGeneralForm] = useState(true)
+  const [generalInfo, setGeneralInfo] = useState([])
   const [experiences, setExperiences] = useState([
     {
         id: 1,
@@ -51,6 +54,13 @@ const addSection = (experience) => {
   setExperiences([...experiences, newExperience])
 }
 
+const addGeneralInfo = (info) => {
+  const id = Math.floor(Math.random() * 10000) + 1
+  const givenInfo = {id, ...info}
+  setGeneralInfo([givenInfo])
+
+}
+
 
   return (
     <>
@@ -58,14 +68,15 @@ const addSection = (experience) => {
       <div className="container">
         
         <div className='left-side'>
-          <div className="builder">
-          <Section title="Your Details" />
+          <div className="builder"> 
+            <Section title="Your Details" onAdd={() => setShowAddGeneralForm(!showAddGeneralForm)} showAdd={showAddGeneralForm} />
+            {showAddGeneralForm && <AddFormGeneral onAdd={addGeneralInfo} /> }
             
           </div>
         </div>
         <div className='right-side'>
 
-          <GeneralInfo />
+          <GeneralInfo generalInfo={generalInfo} />
 
         </div>
       </div>

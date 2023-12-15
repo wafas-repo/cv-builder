@@ -1,17 +1,15 @@
 import React from 'react'
 import Button from './Button'
-import AddFormGeneral from './AddFormGeneral'
 
-const Section = ({ title, onAdd }) => {
+const Section = ({ title, onAdd, showAdd }) => {
   return (
     <>
         <div className='section'>
             <p className='section-title'>{title}</p>
-            <Button color="black" text="Add" onClick={onAdd} />
+            <Button color={showAdd ? "red" : "black"} text={showAdd ? "Close" : "Add" } onClick={onAdd} />
         </div>
-        <div className='section-form'>
-            {title === "Your Details" && <AddFormGeneral />}
-        </div>
+
+        
     </> 
     
   )
