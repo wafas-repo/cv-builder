@@ -16,10 +16,10 @@ const AddFormGeneral = ({onAdd}) => {
     }
 
     onAdd({ firstName, lastName, email, phoneNumber })
-    setFirstName('')
-    setLastName('')
-    setEmail('')
-    setPhoneNumber('')
+    // setFirstName('')
+    // setLastName('')
+    // setEmail('')
+    // setPhoneNumber('')
   }
 
   return (

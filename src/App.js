@@ -5,11 +5,26 @@ import AddFormExp from './components/AddFormExp';
 import Section from './components/Section';
 import GeneralInfo from './components/GeneralInfo';
 import AddFormGeneral from './components/AddFormGeneral';
+import Experiences from './components/Experiences';
+import AddFormEducation from './components/AddFormEducation';
+import RenderEducationInfo from './components/RenderEducationInfo';
+import EducationInfo from './components/EducationInfo';
 
 function App() {
-  const [showAddExpForm, setShowAddExpForm] = useState(true)
-  const [showAddGeneralForm, setShowAddGeneralForm] = useState(true)
+  const [showAddExpForm, setShowAddExpForm] = useState(false)
+  const [showAddGeneralForm, setShowAddGeneralForm] = useState(false)
+  const [showAddEducationForm, setShowAddEducationForm] = useState(false)
+  const [editID, setEditID] = useState(0)
   const [generalInfo, setGeneralInfo] = useState([])
+  const [education, setEducationInfo] = useState([
+    {
+      id: 1,
+      school: "University of Guelph",
+      degree: "Computer Science",
+      date: "October 2021",
+      location: "Guelph, Ontario"
+    }
+  ])
   const [experiences, setExperiences] = useState([
     {
         id: 1,
@@ -46,12 +61,29 @@ const deleteSection = (id) => {
   setExperiences(experiences.filter((exp) => exp.id !== id))
 }
 
+const deleteSectionEdu = (id) => {
+  setEducationInfo(education.filter((edu) => edu.id !== id))
+}
+
+// Edit
+
+const handleEdit = (id) => {
+  const editEntry = education.find((i) => i.id === id)
+
+}
+
 // Add
 
 const addSection = (experience) => {
   const id = Math.floor(Math.random() * 10000) + 1
   const newExperience = {id, ...experience}
   setExperiences([...experiences, newExperience])
+}
+
+const addEducation = (edu) => {
+  const id = Math.floor(Math.random() * 10000) + 1
+  const newEducation = {id, ...edu}
+  setEducationInfo([...education, newEducation])
 }
 
 const addGeneralInfo = (info) => {
@@ -64,19 +96,26 @@ const addGeneralInfo = (info) => {
 
   return (
     <>
-      <Header title="CV Builder!"/>
+      <Header title="CV Builder"/>
       <div className="container">
         
         <div className='left-side'>
           <div className="builder"> 
             <Section title="Your Details" onAdd={() => setShowAddGeneralForm(!showAddGeneralForm)} showAdd={showAddGeneralForm} />
             {showAddGeneralForm && <AddFormGeneral onAdd={addGeneralInfo} /> }
-            
+            <Section title="Education" onAdd={() => setShowAddEducationForm(!showAddEducationForm)} showAdd={showAddEducationForm}/>
+            {showAddEducationForm && <AddFormEducation onAdd={addEducation}/> }
+            <RenderEducationInfo education={education} onDelete={deleteSectionEdu} handleEdit={handleEdit}/>
+            <Section title="Experience" onAdd={() => setShowAddExpForm(!showAddExpForm)} showAdd={showAddExpForm} />
+            {showAddExpForm && <AddFormExp onAdd={addSection} /> }
+            <RenderExperienceInfo experiences={experiences} onDelete={deleteSection} />
           </div>
         </div>
         <div className='right-side'>
 
           <GeneralInfo generalInfo={generalInfo} />
+          <Experiences experiences={experiences} />
+          <EducationInfo education={education} />
 
         </div>
       </div>

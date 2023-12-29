@@ -1,7 +1,6 @@
 import React from 'react'
 
 const GeneralInfo = ({generalInfo}) => {
-  console.log(generalInfo)
   return (
     <div>
 
