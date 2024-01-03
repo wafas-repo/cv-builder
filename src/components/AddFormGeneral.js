@@ -1,26 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-const AddFormGeneral = ({onAdd}) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("")
-
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-
-    if(!firstName){
-        alert('Enter First Name')
-    }
-
-    onAdd({ firstName, lastName, email, phoneNumber })
-    // setFirstName('')
-    // setLastName('')
-    // setEmail('')
-    // setPhoneNumber('')
-  }
+const AddFormGeneral = ({ onAdd, handleChange, onSubmit, info }) => {
 
   return (
     <form className='add-form' onSubmit={onSubmit}>
@@ -28,31 +9,39 @@ const AddFormGeneral = ({onAdd}) => {
         <div className="form-control">
             <label>First Name</label>
             <input 
-                type="text"  
+                type="text" 
+                name="firstName" 
                 placeholder="Enter First Name"
-                value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                defaultValue={info.firstName}
+                onChange={handleChange} />
         </div>
 
         <div className="form-control">
             <label>Last Name</label>
             <input 
-                type="text"  
+                type="text"
+                name="lastName"  
                 placeholder="Enter Last Name"
-                value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+                defaultValue={info.lastName}
+                onChange={handleChange}/>
         </div>
         <div className="form-control">
             <label>Email Address</label>
             <input 
-                type="text"  
+                type="text" 
+                name="emailAddress" 
                 placeholder="Enter Email Address"
-                value={email} onChange={(e) => setEmail(e.target.value)}/>
+                defaultValue={info.email}
+                onChange={handleChange}/>
         </div>
         <div className="form-control">
             <label>Phone Number</label>
             <input 
                 type="text"  
+                name="phone"
                 placeholder="Enter Phone Number"
-                value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
+                defaultValue={info.phoneNumber}
+                onChange={handleChange}/>
         </div>
 
         <input type="submit" className="btn btn-block"  value='Save'/>
