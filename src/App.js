@@ -16,6 +16,17 @@ function App() {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("")
   const [generalInfo, setGeneralInfo] = useState({firstName: '', lastName: '', phoneNumber: '', email: ''})
+  const [education, setEducationInfo] = useState([
+    {
+      id: 1,
+      school: "University of Guelph",
+      degree: "Computer Science",
+      date: "October 2021",
+      location: "Guelph, Ontario"
+    }
+  ])
+  
+
   // const [showAddExpForm, setShowAddExpForm] = useState(false)
   // const [showAddEducationForm, setShowAddEducationForm] = useState(false)
   // const [education, setEducationInfo] = useState([
@@ -63,9 +74,7 @@ function App() {
 //   setExperiences(experiences.filter((exp) => exp.id !== id))
 // }
 
-// const deleteSectionEdu = (id) => {
-//   setEducationInfo(education.filter((edu) => edu.id !== id))
-// }
+
 
 // Add
 
@@ -75,11 +84,6 @@ function App() {
 //   setExperiences([...experiences, newExperience])
 // }
 
-// const addEducation = (edu) => {
-//   const id = Math.floor(Math.random() * 10000) + 1
-//   const newEducation = {id, ...edu}
-//   setEducationInfo([...education, newEducation])
-// }
 
 function handleNameUpdate(event) {
   switch (event.target.name) {
@@ -107,6 +111,17 @@ const addGeneralInfo = (info) => {
 
 }
 
+const addEducation = (edu) => {
+  const id = Math.floor(Math.random() * 10000) + 1
+  const newEducation = {id, ...edu}
+  setEducationInfo([...education, newEducation])
+}
+
+const deleteSectionEdu = (id) => {
+  setEducationInfo(education.filter((edu) => edu.id !== id))
+}
+
+
 const onSubmit = (e) => {
   e.preventDefault()
 
@@ -122,9 +137,6 @@ const onSubmit = (e) => {
 }
 
 
-
-
-
   return (
     <>
       <Header title="CV Builder"/>
@@ -133,9 +145,13 @@ const onSubmit = (e) => {
         <div className='left-side'>
           <div className="builder"> 
             <Section title="Your Details" handleName={handleNameUpdate} onSubmit={onSubmit} info={generalInfo} />
+
+            <Section title="Your Education" education={education} handleAddEducation={addEducation} deleteSectionEdu={deleteSectionEdu} />
             {/* <Section title="Education" onAdd={() => setShowAddEducationForm(!showAddEducationForm)} showAdd={showAddEducationForm}/> */}
             {/* {showAddEducationForm && <AddFormEducation onAdd={addEducation}/> } */}
-            {/* <RenderEducationInfo education={education} onDelete={deleteSectionEdu} /> */}
+            {/* <RenderEducationInfo education={education} onDelete={deleteSectionEdu} /> */} 
+            
+            <Section title="Your Experience" />
             {/* <Section title="Experience" onAdd={() => setShowAddExpForm(!showAddExpForm)} showAdd={showAddExpForm} /> */}
             {/* {showAddExpForm && <AddFormExp onAdd={addSection} /> } */}
             {/* <RenderExperienceInfo experiences={experiences} onDelete={deleteSection} /> */}
@@ -143,7 +159,7 @@ const onSubmit = (e) => {
         </div>
         <div className='right-side'>
 
-          {/* <GeneralInfo generalInfo={generalInfo} /> */}
+          <GeneralInfo generalInfo={generalInfo} />
           {/* <Experiences experiences={experiences} />
           <EducationInfo education={education} /> */}
 

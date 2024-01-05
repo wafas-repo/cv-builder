@@ -50,12 +50,8 @@ body {
 }
 
 .section {
-  /* padding: 2rem 5rem;
-  border-bottom: 1px solid rgb(220,220,220); */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  padding: 2rem 5rem;
+  border-bottom: 1px solid black;
 }
 
 .section-title {
@@ -63,10 +59,15 @@ body {
   font-weight: 900;
 }
 
+.section-title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .builder {
-  overflow: auto;
-  padding: 2rem 5rem;
-  border-bottom: 1px solid black;
+  height: calc(100% - 11rem);
+  overflow: scroll;
 }
 
 .btn {
