@@ -7,6 +7,7 @@ const EduInfo = ({ education, onDelete, handleEdit }) => {
     <div className='expInfo'>
         <h3>
         {
+          // switch these around
           education.school || education.degree ? (education.school ? education.school : "") + (education.degree ? " - " + education.degree : "") : "Untitled"
         }
         

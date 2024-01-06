@@ -8,10 +8,14 @@ const Education = ({isExpanded, handleAddEducation, deleteSectionEdu, education}
     <div>
         {isExpanded && 
             <>
-                <p className="description">
-                Include your Education Information.
+               <p className="description">
+                    Include your Education Information.
                 </p>
-                <RenderEducationInfo education={education} onDelete={deleteSectionEdu} />
+                <div className='eduI-form'>
+                    {education.map((education) => (
+                        <RenderEducationInfo education={education} onDelete={deleteSectionEdu} />
+                    ))}
+                </div>    
                 <br></br>
                 <AddButton title="Add Experience" handleAddEducation={handleAddEducation} />
             </>

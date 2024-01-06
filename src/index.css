@@ -66,8 +66,8 @@ body {
 }
 
 .builder {
-  height: calc(100% - 11rem);
-  overflow: scroll;
+  /* height: calc(100% - 11rem); */
+  /* overflow: scroll; */
 }
 
 .btn {
@@ -97,15 +97,79 @@ body {
   width: 100%;
 }
 
+.education {
+  display: flex;
+  flex-direction: column!important;
+  gap: 2rem!important;
+  margin-bottom: 1rem;
+
+}
+
+.education-info {
+  position: relative;
+  height: 3rem
+}
+
+.education-info-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% + 2rem);
+  padding: 1rem;
+  
+}
+
+.delete-education {
+
+  position: absolute;
+    right: -4rem;
+    top: 2rem;
+    border: none;
+    outline: none;
+    background: none;
+
+}
+
+.eduI-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: visible;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+#edu-item-info {
+  display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+}
+
+#edu-item-info h1 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+#edu-item-info p {
+  margin: 0;
+  font-size: .9rem;
+  color: #9d9b9b;
+}
+
+.education-info-summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+}
+
 .expInfo {
   background: #f4f4f4;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
-}
-
-.expInfo.reminder {
-  border-left: 5px solid green;
 }
 
 .expInfo h3 {
