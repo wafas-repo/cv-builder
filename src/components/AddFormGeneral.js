@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-const AddFormGeneral = ({ onAdd, handleChange, onSubmit, info }) => {
+const AddFormGeneral = ({ handleChange, onSubmit, info }) => {
 
   return (
     <form className='add-form' onSubmit={onSubmit}>

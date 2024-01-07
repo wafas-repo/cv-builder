@@ -1,45 +1,24 @@
 import { useState } from 'react'
 
-const AddFormEducation = ({ onAdd }) => {
-
-  const [school, setSchool] = useState('')
-  const [degree, setDegree] = useState('')
-  const [date, setDate] = useState('')
-  const [location, setLocation] = useState('')
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-
-    if(!school) {
-        alert('please fill form')
-        return
-    }
-
-    onAdd({ school, degree, date, location })
-
-    setSchool('')
-    setDegree('')
-    setDate('')
-    setLocation('')
-  }
+const AddFormEducation = ({ handleChange, education, onSubmitEdu }) => {
 
   return (
-    <form className='add-form' onSubmit={onSubmit}> 
+    <form className='add-form' onSubmit={(e) => onSubmitEdu(e, education.id)}> 
         <div className='form-control'>
             <label>School/University</label>
-            <input type="text" placeholder='Enter school name' value={school} onChange={(e) => setSchool(e.target.value)}/>
+            <input type="text" placeholder='Enter school name' name="school" defaultValue={education.school}  onChange={(e) => handleChange(e, education.id)} />
         </div>
         <div className='form-control'>
             <label>Degree</label>
-            <input type="text" placeholder='Enter Degree name' value={degree} onChange={(e) => setDegree(e.target.value)}/>
+            <input type="text" placeholder='Enter Degree name' name='degree' defaultValue={education.degree} onChange={(e) => handleChange(e, education.id)}/>
         </div>
         <div className='form-control'>
             <label>Date</label>
-            <input type="text" placeholder='Enter Date of Graduation' value={date} onChange={(e) => setDate(e.target.value)}/>
+            <input type="text" placeholder='Enter Date of Graduation' name='date' defaultValue={education.date}  onChange={(e) => handleChange(e, education.id)}/>
         </div>
         <div className='form-control'>
             <label>Location</label>
-            <input type="text" placeholder='Enter Location' value={location} onChange={(e) => setLocation(e.target.value)}/>
+            <input type="text" placeholder='Enter Location' name='location' defaultValue={education.location}  onChange={(e) => handleChange(e, education.id)}/>
         </div>
         <input type="submit" value='Save' className='btn btn-block'/>
     </form>
