@@ -1,12 +1,11 @@
 import { IoMdAdd } from "react-icons/io";
-const AddButton = ({ title, handleAddEducation }) => {
+const AddButton = ({ title, handleAdd }) => {
   return (
     <>
-        <button className="add-button" onClick={handleAddEducation} >
+      
+        { title === "Add Education" && (<button className="add-button" onClick={handleAdd} >  <IoMdAdd />   {title} </button>) }
 
-        <IoMdAdd />   
-        {title}
-        </button>
+        { title === "Add Experience" && (<button className="add-button" onClick={handleAdd} >  <IoMdAdd />   {title} </button>) }
     </>
   )
 }

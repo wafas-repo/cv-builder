@@ -4,7 +4,7 @@ import AddFormGeneral from "./AddFormGeneral";
 import Experience from "./Experience";
 import Education from "./Education";
 
-const Section = ({ title, handleName, onSubmit, info, handleAddExperience, handleAddEducation, deleteSectionEdu, education, handleChange}) => {
+const Section = ({ title, onSubmit, info, handleAdd, handleDelete, handleChange}) => {
 
   const [showAddGeneralForm, setShowAddGeneralForm] = useState(false)
  
@@ -21,22 +21,29 @@ const Section = ({ title, handleName, onSubmit, info, handleAddExperience, handl
           </div>
 
           {title === "Your Details" && (
-            showAddGeneralForm && <AddFormGeneral onSubmit={onSubmit} handleChange={handleName} info={info} /> 
+            showAddGeneralForm && <AddFormGeneral onSubmit={onSubmit} handleChange={handleChange} info={info} /> 
           )}
           
           {title === "Your Education" && (
             <Education 
               isExpanded={showAddGeneralForm} 
-              education={education} 
-              handleAddEducation={handleAddEducation} 
-              deleteSectionEdu={deleteSectionEdu} 
+              education={info} 
+              handleAddEducation={handleAdd} 
+              deleteSectionEdu={handleDelete} 
               handleEduChange={handleChange}
               onSubmitEdu={onSubmit}
             />
           )}
 
           {title === "Your Experience" && (
-            <Experience isExpanded={showAddGeneralForm} handleAddExperience={handleAddExperience}  />
+            <Experience 
+              isExpanded={showAddGeneralForm}
+              experiences={info}
+              handleAddExperience={handleAdd}  
+              deleteSectionExp={handleDelete}
+              handleExpChange={handleChange}
+              onSubmitExp={onSubmit}
+            />
           )}
         </div>
         

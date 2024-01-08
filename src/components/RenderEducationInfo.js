@@ -30,7 +30,6 @@ const RenderEducationInfo = ({education, onDelete, handleEduChange, onSubmitEdu}
           <div>
             {showAddEducationForm && <AddFormEducation handleChange={handleEduChange} education={education} onSubmitEdu={onSubmitEdu} />}
           </div>
-
     </div>
   
   </>

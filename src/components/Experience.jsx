@@ -1,22 +1,24 @@
 import AddButton from "./AddButton"
+import RenderExperienceInfo from "./RenderExperienceInfo"
 
-const Experience = ({ isExpanded, handleAddExperience }) => {
+const Experience = ({ isExpanded, handleAddExperience, deleteSectionExp, experiences, handleExpChange, onSubmitExp }) => {
   return ( 
     <div>
         {isExpanded && 
             <>
                 <p className="description">
-                Include your last 10 years of relevant experience and dates in this
-                section.
+                Include your relevant experience and dates in this section.
                 </p>
-                <br></br>
-                <AddButton title="Add Experience" handleAddExperience={handleAddExperience} />
+                <div className="eduI-form">
+                  {experiences.map((experience) => (
+                    <RenderExperienceInfo experience={experience} onDelete={deleteSectionExp} handleExpChange={handleExpChange} onSubmitExp={onSubmitExp} />
+                  ))}
+                </div>
+                <AddButton title="Add Experience" handleAdd={handleAddExperience} />
             </>
             
 
-        }
-
-        
+        } 
     </div>
   )
 }

@@ -24,27 +24,26 @@ function App() {
       date: "October 2021",
       location: "Guelph, Ontario"
     },
-    {
-      id:2,
-      school: "GCI",
-      degree: "highschool",
-      date: '2015',
-      location: 'cambridge'
-    }
   ])
-  // const [showAddExpForm, setShowAddExpForm] = useState(false)
-  // const [showAddEducationForm, setShowAddEducationForm] = useState(false)
-//   const [experiences, setExperiences] = useState([
-//     {
-//         id: 1,
-//         title: 'Customer Service Representative',
-//         company: 'Wellwise',
-//         responsibilities: 'Organized customer information and data for customer service purpose.\nAssisted customers in various areas including insurance claims, ostomy care, medical/home care aids',
-//         from: 'January 2018',
-//         end: 'January 2019',
-//     }
-// ])
+  const [experiences, setExperiences] = useState([
+    {
+        id: 1,
+        title: 'Customer Service Representative',
+        company: 'Wellwise',
+        responsibilities: 'Organized customer information and data for customer service purpose.\nAssisted customers in various areas including insurance claims, ostomy care, medical/home care aids',
+        start: 'January 2018',
+        end: 'January 2019',
+    }
+ ])
 
+ console.log(experiences)
+
+  const addGeneralInfo = (info) => {
+    const id = Math.floor(Math.random() * 10000) + 1
+    const givenInfo = {id, ...info}
+    setGeneralInfo(givenInfo)
+  
+  }
 
 function handleNameUpdate(event) {
   switch (event.target.name) {
@@ -65,11 +64,23 @@ function handleNameUpdate(event) {
   }
 }
 
+const onSubmit = (e) => {
+  e.preventDefault()
+
+  if(!firstName){
+      alert('Enter First Name')
+  }
+  addGeneralInfo({ firstName, lastName, email, phoneNumber })
+
+}
+
 const [formData, setFormData] = useState({
   // Store form data separately for each user by their ID
 });
 
-console.log(formData)
+const [formDataExp, setFormDataExp] = useState({
+  // Store form data separately for each user by their ID
+});
 
 const handleEducationChange = (e, eduId) => {
   const { name, value } = e.target;
@@ -93,12 +104,30 @@ const onSubmitEdu = (e, eduId) => {
 
 };
 
-const addGeneralInfo = (info) => {
-  const id = Math.floor(Math.random() * 10000) + 1
-  const givenInfo = {id, ...info}
-  setGeneralInfo(givenInfo)
+// Experience
 
-}
+const handleExpChange = (e, expId) => {
+  const { name, value } = e.target;
+  setFormDataExp({
+    ...formDataExp,
+    [expId]: { ...formDataExp[expId], [name]: value },
+  });
+};
+
+const onSubmitExp = (e, expId) => {
+  e.preventDefault();
+  if (formDataExp[expId]) {
+    const updatedExpItem = experiences.map((expItem) =>
+      expItem.id === expId ? { ...expItem, ...formDataExp[expId] } : expItem
+    );
+    setExperiences(updatedExpItem);
+    // Reset the formData for the current user after submission
+    setFormDataExp({ ...formDataExp, [expId]: {} });
+  }
+
+
+};
+
 
 const addEducation = (edu) => {
   const id = Math.floor(Math.random() * 10000) + 1
@@ -106,20 +135,22 @@ const addEducation = (edu) => {
   setEducationInfo([...education, newEducation])
 }
 
+const addExperience = (exp) => {
+  const id = Math.floor(Math.random() * 10000) + 1
+  const newExperience = {id, ...exp}
+  setExperiences([...experiences, newExperience]);
+}
+
 const deleteSectionEdu = (id) => {
   setEducationInfo(education.filter((edu) => edu.id !== id))
 }
 
-
-const onSubmit = (e) => {
-  e.preventDefault()
-
-  if(!firstName){
-      alert('Enter First Name')
-  }
-  addGeneralInfo({ firstName, lastName, email, phoneNumber })
-
+const deleteSectionExp = (id) => {
+  setExperiences(experiences.filter((exp) => exp.id !== id))
 }
+
+
+
 
   return (
     <>
@@ -130,16 +161,16 @@ const onSubmit = (e) => {
           <div className="builder"> 
             <Section 
               title="Your Details" 
-              handleName={handleNameUpdate} 
-              onSubmit={onSubmit} 
               info={generalInfo} 
+              handleChange={handleNameUpdate} 
+              onSubmit={onSubmit} 
             />
 
             <Section 
               title="Your Education" 
-              education={education} 
-              handleAddEducation={addEducation} 
-              deleteSectionEdu={deleteSectionEdu} 
+              info={education} 
+              handleAdd={addEducation} 
+              handleDelete={deleteSectionEdu} 
               handleChange={handleEducationChange}
               onSubmit={onSubmitEdu}
               
@@ -148,7 +179,14 @@ const onSubmit = (e) => {
             {/* {showAddEducationForm && <AddFormEducation onAdd={addEducation}/> } */}
             {/* <RenderEducationInfo education={education} onDelete={deleteSectionEdu} /> */} 
             
-            <Section title="Your Experience" />
+            <Section 
+              title="Your Experience"
+              info={experiences}
+              handleAdd={addExperience}
+              handleDelete={deleteSectionExp}
+              handleChange={handleExpChange}
+              onSubmit={onSubmitExp}
+            />
             {/* <Section title="Experience" onAdd={() => setShowAddExpForm(!showAddExpForm)} showAdd={showAddExpForm} /> */}
             {/* {showAddExpForm && <AddFormExp onAdd={addSection} /> } */}
             {/* <RenderExperienceInfo experiences={experiences} onDelete={deleteSection} /> */}
@@ -157,7 +195,7 @@ const onSubmit = (e) => {
         <div className='right-side'>
 
           <GeneralInfo generalInfo={generalInfo} />
-          {/* <Experiences experiences={experiences} /> */}
+          <Experiences experiences={experiences} />
           <EducationInfo education={education} />
 
         </div>

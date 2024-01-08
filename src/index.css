@@ -105,6 +105,13 @@ body {
 
 }
 
+.experience {
+  display: flex;
+  flex-direction: column!important;
+  gap: 2rem!important;
+  margin-bottom: 3rem;
+}
+
 .education-info {
   position: relative;
   height: 3rem
@@ -115,7 +122,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: calc(100% + 2rem);
+  width: calc(100%);
   padding: 1rem;
   
 }
@@ -123,7 +130,7 @@ body {
 .delete-education {
 
   position: absolute;
-    right: -4rem;
+    right: -3rem;
     top: 2rem;
     border: none;
     outline: none;

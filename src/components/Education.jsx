@@ -16,8 +16,7 @@ const Education = ({isExpanded, handleAddEducation, deleteSectionEdu, education,
                         <RenderEducationInfo education={education} onDelete={deleteSectionEdu} handleEduChange={handleEduChange} onSubmitEdu={onSubmitEdu} />
                     ))}
                 </div>    
-                <br></br>
-                <AddButton title="Add Experience" handleAddEducation={handleAddEducation} />
+                <AddButton title="Add Education" handleAdd={handleAddEducation} />
             </>
             
 
