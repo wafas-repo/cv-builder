@@ -24,11 +24,15 @@ body {
 
 .header {
   display: flex;
-  min-height: 50px;
-  justify-content: space-between;
-  align-items: center;
-  /* margin-bottom: 20px; */
+  /* position: fixed;
+  z-index: 1; */
   background-color: black;
+  justify-content: center;
+  width: 100vw;
+  height: 10vh;
+  align-items: center;
+  background: #14171d;
+  border-bottom: 1px solid #202530;
 }
 
 .header h1 {
@@ -44,9 +48,52 @@ body {
 }
 
 .right-side {
+  position: relative;
+  background: rgb(204,204,204); 
+  width: 50vw;
+  overflow: scroll;
 
+}
 
+.main-page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 10mm auto;
+  background: white;
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
 
+.sub-page {
+  padding: 1cm;
+  height: 297mm;
+}
+@page {
+  size: A4;
+  margin: 0;
+}
+@media print {
+  html, body {
+  width: 210mm;
+  height: 297mm;        
+  }
+  .main-page {
+  margin: 0;
+  border: initial;
+  border-radius: initial;
+  width: initial;
+  min-height: initial;
+  box-shadow: initial;
+  background: initial;
+  page-break-after: always;
+  }
+}
+
+.print-btns {
+  display: flex;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    gap: 10px;
 }
 
 .section {
@@ -66,8 +113,8 @@ body {
 }
 
 .builder {
-  /* height: calc(100% - 11rem); */
-  /* overflow: scroll; */
+  height: calc(100%); 
+  overflow: scroll;
 }
 
 .btn {

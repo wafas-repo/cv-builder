@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useRef } from "react";
+import ReactToPrint from 'react-to-print';
 import Header from "./components/Header";
 import RenderExperienceInfo from "./components/RenderExperienceInfo";
 import AddFormExp from './components/AddFormExp';
@@ -8,9 +10,11 @@ import AddFormGeneral from './components/AddFormGeneral';
 import Experiences from './components/Experiences';
 import AddFormEducation from './components/AddFormEducation';
 import RenderEducationInfo from './components/RenderEducationInfo';
-import EducationInfo from './components/EducationInfo';
+import CVPreview from './components/CVPreview';
+import html2pdf from "html2pdf.js";
 
 function App() {
+  const componentRef = useRef();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -63,6 +67,17 @@ function handleNameUpdate(event) {
       break;
   }
 }
+
+const downloadAsPdf = () => {
+  const cv = document.querySelector(".main-page");
+  const options = {
+    filename: "resume.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+  };
+  html2pdf().set(options).from(cv).save();
+};
 
 const onSubmit = (e) => {
   e.preventDefault()
@@ -175,9 +190,6 @@ const deleteSectionExp = (id) => {
               onSubmit={onSubmitEdu}
               
             />
-            {/* <Section title="Education" onAdd={() => setShowAddEducationForm(!showAddEducationForm)} showAdd={showAddEducationForm}/> */}
-            {/* {showAddEducationForm && <AddFormEducation onAdd={addEducation}/> } */}
-            {/* <RenderEducationInfo education={education} onDelete={deleteSectionEdu} /> */} 
             
             <Section 
               title="Your Experience"
@@ -187,16 +199,24 @@ const deleteSectionExp = (id) => {
               handleChange={handleExpChange}
               onSubmit={onSubmitExp}
             />
-            {/* <Section title="Experience" onAdd={() => setShowAddExpForm(!showAddExpForm)} showAdd={showAddExpForm} /> */}
-            {/* {showAddExpForm && <AddFormExp onAdd={addSection} /> } */}
-            {/* <RenderExperienceInfo experiences={experiences} onDelete={deleteSection} /> */}
           </div>
         </div>
         <div className='right-side'>
 
-          <GeneralInfo generalInfo={generalInfo} />
-          <Experiences experiences={experiences} />
-          <EducationInfo education={education} />
+          {/* <GeneralInfo generalInfo={generalInfo} />
+          <Experiences experiences={experiences} /> */}
+          <div className='print-btns'>
+
+          <ReactToPrint
+              trigger={() => <button>Print this out!</button>}
+              content={() => componentRef.current}
+          />
+          <button onClick={downloadAsPdf}> Download </button>
+
+          </div>
+          
+
+          <CVPreview ref={componentRef} />
 
         </div>
       </div>
