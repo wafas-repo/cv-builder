@@ -2,24 +2,20 @@ import { useState } from 'react'
 import { useRef } from "react";
 import ReactToPrint from 'react-to-print';
 import Header from "./components/Header";
-import RenderExperienceInfo from "./components/RenderExperienceInfo";
-import AddFormExp from './components/AddFormExp';
 import Section from './components/Section';
-import GeneralInfo from './components/GeneralInfo';
-import AddFormGeneral from './components/AddFormGeneral';
-import Experiences from './components/Experiences';
-import AddFormEducation from './components/AddFormEducation';
-import RenderEducationInfo from './components/RenderEducationInfo';
 import CVPreview from './components/CVPreview';
 import html2pdf from "html2pdf.js";
+import { IoPrintSharp } from "react-icons/io5";
+import { FaFileDownload } from "react-icons/fa";
 
 function App() {
   const componentRef = useRef();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("")
-  const [generalInfo, setGeneralInfo] = useState({firstName: '', lastName: '', phoneNumber: '', email: ''})
+  const [generalInfo, setGeneralInfo] = useState({firstName: '', lastName: '', phoneNumber: '', email: '', address: ''})
   const [education, setEducationInfo] = useState([
     {
       id: 1,
@@ -37,10 +33,9 @@ function App() {
         responsibilities: 'Organized customer information and data for customer service purpose.\nAssisted customers in various areas including insurance claims, ostomy care, medical/home care aids',
         start: 'January 2018',
         end: 'January 2019',
+        location: 'Cambridge, On'
     }
  ])
-
- console.log(experiences)
 
   const addGeneralInfo = (info) => {
     const id = Math.floor(Math.random() * 10000) + 1
@@ -62,6 +57,9 @@ function handleNameUpdate(event) {
       break;
     case "phone":
       setPhoneNumber(event.target.value);
+      break;
+    case "address":
+      setAddress(event.target.value);
       break;
     default:
       break;
@@ -85,7 +83,7 @@ const onSubmit = (e) => {
   if(!firstName){
       alert('Enter First Name')
   }
-  addGeneralInfo({ firstName, lastName, email, phoneNumber })
+  addGeneralInfo({ firstName, lastName, email, phoneNumber, address })
 
 }
 
@@ -169,7 +167,7 @@ const deleteSectionExp = (id) => {
 
   return (
     <>
-      <Header title="CV Builder"/>
+      <Header titleP1='CV' titleP2='Builder' />
       <div className="container">
         
         <div className='left-side'>
@@ -202,21 +200,23 @@ const deleteSectionExp = (id) => {
           </div>
         </div>
         <div className='right-side'>
-
-          {/* <GeneralInfo generalInfo={generalInfo} />
-          <Experiences experiences={experiences} /> */}
           <div className='print-btns'>
 
           <ReactToPrint
-              trigger={() => <button>Print this out!</button>}
+              trigger={() => <button className='print-pdf-btn' ><IoPrintSharp /></button>}
               content={() => componentRef.current}
           />
-          <button onClick={downloadAsPdf}> Download </button>
+          <button className='print-pdf-btn'  onClick={downloadAsPdf}> <FaFileDownload  /> </button>
 
           </div>
           
 
-          <CVPreview ref={componentRef} />
+          <CVPreview
+            ref={componentRef}
+            generalInfo={generalInfo}
+            educationInfo={education}
+            experienceInfo={experiences}
+          />
 
         </div>
       </div>

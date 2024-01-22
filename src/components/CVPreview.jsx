@@ -1,10 +1,15 @@
 import { forwardRef } from 'react';
+import GeneralInfo from './GeneralInfo';
+import EducationInfo from './EducationInfo';
+import ExperienceInfo from './ExperienceInfo';
 
 const CVPreview = forwardRef(( props, ref ) => {
   return (
     <div  ref={ref} className='main-page'>
         <div className="sub-page">
-            <h3 align='center'>A4 Page in Portrait.(210mm X 297mm)</h3>
+            <GeneralInfo generalInfo={props.generalInfo} />
+            <EducationInfo educationInfo={props.educationInfo} />
+            <ExperienceInfo experienceInfo={props.experienceInfo} />
         </div>   
     </div>
   )});

@@ -3,9 +3,9 @@ const AddButton = ({ title, handleAdd }) => {
   return (
     <>
       
-        { title === "Add Education" && (<button className="add-button" onClick={handleAdd} >  <IoMdAdd />   {title} </button>) }
+        { title === "Add Education" && (<button className="add-button" onClick={handleAdd} > <div className="add-btn-round"><IoMdAdd /> </div>    {title} </button>) }
 
-        { title === "Add Experience" && (<button className="add-button" onClick={handleAdd} >  <IoMdAdd />   {title} </button>) }
+        { title === "Add Experience" && (<button style={{'margin-top': '2rem'}} className="add-button" onClick={handleAdd} > <div className="add-btn-round"><IoMdAdd /> </div>   {title} </button>) }
     </>
   )
 }

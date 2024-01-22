@@ -17,7 +17,7 @@ const Section = ({ title, onSubmit, info, handleAdd, handleDelete, handleChange}
         <div className='section'>
           <div className="section-title-bar">
             <p className='section-title'>{title}</p>
-            <Button color={showAddGeneralForm ? "red" : "black"} text={showAddGeneralForm ? "Close" : "Add" } onClick={onExpand} />
+            <Button color={'#fff'} showAddGeneralForm={showAddGeneralForm} onClick={onExpand} />
           </div>
 
           {title === "Your Details" && (
@@ -46,8 +46,6 @@ const Section = ({ title, onSubmit, info, handleAdd, handleDelete, handleChange}
             />
           )}
         </div>
-        
-
         
     </> 
     

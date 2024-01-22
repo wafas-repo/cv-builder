@@ -2,18 +2,31 @@ import React from 'react'
 
 const GeneralInfo = ({generalInfo}) => {
   return (
-    <div>
-      
+    <div className='general-info'>
+            <h1 align='center'>{generalInfo.firstName} {generalInfo.lastName}</h1>
+            <div className="contact-info">
+              {generalInfo.email && (
+                <div>
+                  <span>{generalInfo.email}</span>
+                </div>
+              )}
 
-      <h1>General Information</h1>
-      
-          <>
-            <h3>{generalInfo.firstName} {generalInfo.lastName}</h3>
-            <h3>{generalInfo.email}</h3>
-            <h3>{generalInfo.phoneNumber}</h3>
-          </>
+              |
 
+              {generalInfo.phoneNumber && (
+                <div>
+                  <span>{generalInfo.phoneNumber}</span>
+                </div>
+              )}
 
+              |
+
+              {generalInfo.address && (
+                <div>
+                  <span>{generalInfo.address}</span>
+                </div>
+              )}
+            </div>
     </div>
   )
 }

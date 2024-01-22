@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
+import Button from "./Button";
 import AddFormEducation from './AddFormEducation';
 
 const RenderEducationInfo = ({education, onDelete, handleEduChange, onSubmitEdu}) => {
@@ -20,14 +20,14 @@ const RenderEducationInfo = ({education, onDelete, handleEduChange, onSubmitEdu}
                   <p>{education.date ? education.date : "Graduation Date"}</p>
                 </div>
               </div>
-              <span> <FaRegEdit style={{height: '1rem', width:'1rem'}} onClick={onExpand} /> </span>
+              <Button color={'rgb(255 255 255 / 67%)'} showAddGeneralForm={showAddEducationForm} onClick={onExpand} />
             </button>
             <button className="delete-education">
-              <MdDelete style={{height: '1rem', width:'1rem'}} onClick={() => onDelete(education.id)} />
+              <MdDelete style={{height: '1.2rem', width:'1.2rem'}} onClick={() => onDelete(education.id)} />
             </button>
 
           </div>
-          <div>
+          <div className="education-form">
             {showAddEducationForm && <AddFormEducation handleChange={handleEduChange} education={education} onSubmitEdu={onSubmitEdu} />}
           </div>
     </div>

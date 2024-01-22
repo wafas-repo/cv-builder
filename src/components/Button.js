@@ -1,14 +1,27 @@
-
-const Button = ({  color, text, onClick }) => {
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+const Button = ({ color, onClick, showAddGeneralForm }) => {
 
   return (
-    <button 
+    <>
+    {showAddGeneralForm ? 
+      <button 
         onClick={onClick} 
-        style={{ backgroundColor: color}} 
         className='btn'
-    >
-        {text}
-    </button>
+      >
+      <IoIosArrowUp style={{color: color}} />
+      </button> 
+      :
+      <button 
+        onClick={onClick} 
+        className='btn'
+      >
+      <IoIosArrowDown style={{color : color}} />
+      </button>
+       
+    }
+      
+    </>
   )
 }
 

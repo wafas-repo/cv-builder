@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types'
 
 
-const Header = ({title, onAdd}) => {
+const Header = ({titleP1, titleP2, onAdd}) => {
 
     return (
         <header className='header'>
-            <h1>{title}</h1>
+            <h1>{titleP1}<span className='title-pt2'>{titleP2}</span></h1>
         </header>
     )
 }
 
 Header.defaultProps = {
-    title: 'CV Builder',
+    titleP1: 'CV',
+    titleP2: 'Builer'
   }
   
 Header.protoTypes = {

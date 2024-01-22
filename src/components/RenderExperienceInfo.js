@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
+import Button from "./Button";
 import AddFormExp from "./AddFormExp";
 
 const RenderExperienceInfo = ({experience, onDelete, handleExpChange, onSubmitExp }) => {
@@ -20,13 +20,13 @@ const RenderExperienceInfo = ({experience, onDelete, handleExpChange, onSubmitEx
                   <p>{experience.start || experience.end ? (experience.start ? experience.start : "") + (experience.end ? " - " + experience.end : "") : "Start - End"}</p>
                 </div>
               </div>
-              <span> <FaRegEdit style={{height: '1rem', width:'1rem'}}  onClick={onExpand}  /> </span>
+              <Button color={'rgb(255 255 255 / 67%)'} showAddGeneralForm={showAddExpForm} onClick={onExpand} />
             </button>
             <button className="delete-education">
-              <MdDelete style={{height: '1rem', width:'1rem'}} onClick={() => onDelete(experience.id)} />
+              <MdDelete style={{height: '1.2rem', width:'1.2rem'}} onClick={() => onDelete(experience.id)} />
             </button>
           </div>
-          <div>
+          <div className="experience-form">
             {showAddExpForm && <AddFormExp handleChange={handleExpChange} onSubmitExp={onSubmitExp} experience={experience}  />}
           </div>
         </div>
