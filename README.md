@@ -1,4 +1,24 @@
-# Getting Started with Create React App
+# CVBuilder
+
+A React app for creating a simple resume.<br/>
+
+**To see the full live application, visit:<br/>
+https://react-cv-builder.netlify.app**
+
+🚀 Features:
+
+* User-Friendly Interface
+* PDF Download Capability
+* Print Capability
+* Advanced Customization
+* Dynamic Experience Management
+
+🛠️ Development Tools:
+
+* React.js
+* HTML/CSS
+* JavaScript (ES6+)
+* HTML2PDF.js
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
